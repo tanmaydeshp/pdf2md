@@ -47,22 +47,22 @@ def encode_image_to_base64(image_path):
         with open(image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
 
-def expand_textblock(textblock, width, height):
+def expand_textblock(textblock, height, width):
     x1 = max(0, min(textblock.block.x_1 -35, width - 1)) 
-    x2 = max(0, min(textblock.block.x_2 + 35, width - 1)) 
-    y1 = max(0, min(textblock.block.y_1 - 35, height - 1))
-    y2 = max(0, min(textblock.block.y_2 + 35, height -1 )) 
+    x2 = max(0, min(textblock.block.x_2 + 35, width -1))
+    y1 = max(0, min(textblock.block.y_1 - 35, height -1 ))
+    y2 = max(0, min(textblock.block.y_2 + 35, height-1))  
     expanded_textblock = TextBlock(Rectangle(x1, y1, x2, y2), textblock.text, textblock.id, textblock.type, textblock.parent, textblock.next, textblock.score)
     return expanded_textblock
 
 def detect_graphics(image_path, pageno):
     image = cv2.imread(image_path)
-    width, height, _ = image.shape
+    height, width, _ = image.shape
     layout = ocr_model.detect(image)
     i = 1
     for textblock in layout:
         if textblock.type in ["Figure", "Table"]:
-            textblock = expand_textblock(textblock, width, height)
+            textblock = expand_textblock(textblock, height, width)
             segment = textblock.crop_image(image)
             if segment is None or segment.size == 0:
                 continue 

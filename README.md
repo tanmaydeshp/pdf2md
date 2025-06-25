@@ -4,7 +4,7 @@ Only LLMs available on OpenRouter (https://openrouter.ai/) are currently support
 To run the pipeline for a file with path `filename.pdf` using an LLM with the OpenRouter model code `model-code`, simply run the following code block:
 ```
 git clone https://github.com/tanmaydeshp/pdf2md.git
-pip install -r requirements.txt 
+bash setup.sh 
 python pdf2md.py -f filename.pdf -m model-code
 ```
 For example, `python pdf2md.py -f test.pdf -m google/gemini-2.5-flash` would run the pipeline using Google Gemini 2.5 Flash on the test.pdf file.
