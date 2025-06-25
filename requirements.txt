@@ -1,0 +1,6 @@
+layoutparser
+torchvision
+"git+https://github.com/facebookresearch/detectron2.git@v0.5#egg=detectron2"
+Pillow==9.5.0
+cv2 
+python-dotenv
