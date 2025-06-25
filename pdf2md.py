@@ -139,6 +139,12 @@ def pdf_to_md(filepath, model):
     init_dirs(filepath, model)
     pdf_to_img(filepath)
     responses_json = perform_ocr(model)
+    md_files = [f for f in os.listdir(MD_DIR) if os.path.isfile(os.path.join(MD_DIR, f))]
+    with open(os.path.join(MD_DIR, "extracted.md"), "w", encoding="utf-8") as extracted:
+        for f in md_files:
+            with open(os.path.join(MD_DIR, f), "r", encoding="utf-8") as file:
+                for line in file: 
+                    extracted.write(f"{line}\n")
     return responses_json
 
 def main():
